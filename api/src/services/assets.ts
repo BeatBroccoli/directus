@@ -171,6 +171,8 @@ export class AssetsService {
 			const readStream = await storage.location(file.storage).read(file.filename_disk, range);
 
 			const transformer = getSharpInstance();
+			transformer.jpeg({ progressive: true, force: false })
+			transformer.png({ progressive: true, force: false })
 
 			transformer.timeout({
 				seconds: clamp(Math.round(getMilliseconds(env['ASSETS_TRANSFORM_TIMEOUT'], 0) / 1000), 1, 3600),
